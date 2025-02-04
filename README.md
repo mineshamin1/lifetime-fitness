@@ -42,7 +42,7 @@ There are 2 bots one for Pickball <code>book_pickball.py</code> and one for Squa
 <li>
 <p dir="auto"><strong>Automation:</strong></p>
 <ul dir="auto">
-<li>For daily automated bookings at 9AM, add the execution of the <code>book_pickball.py</code> or <code>book_squash.py</code> program to a crontab file. This will ensure the bot runs at 9AM every day.</li>
+<li>For daily automated bookings at 9AM, add the execution of the <code>book_pickball.py</code> or <code>book_squash.py</code> program to a Crontab file for Unix or Task Scheduler for Windows. This will ensure the bot runs at 9AM every day.</li>
 </ul>
 </li>
 </ol>
