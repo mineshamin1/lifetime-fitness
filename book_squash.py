@@ -34,6 +34,12 @@ def book_court():
     try:
         # Login to Lifetime website
         driver.get("https://my.lifetime.life/login.html")
+        time.sleep(3)
+        
+        cookie_accept_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, "onetrust-accept-btn-handler")))
+        driver.execute_script("arguments[0].click();", cookie_accept_button)
+        time.sleep(1)
+        
         WebDriverWait(driver, 10).until(EC.presence_of_element_located((By.ID, "account-username"))).send_keys(email)
         driver.find_element(By.ID, "account-password").send_keys(password)
         driver.find_element(By.ID, "login-btn").click()
