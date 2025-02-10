@@ -8,6 +8,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.chrome.service import Service
+from selenium.webdriver.common.action_chains import ActionChains
 
 # Configure headless Chrome
 chrome_options = Options()
@@ -64,11 +66,12 @@ def book_court():
 
                     # Accept waiver if prompted
                     try:
-                        waiver_button = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.ID, "acceptwaiver")))
-                        driver.execute_script("arguments[0].click();", waiver_button)
-                        time.sleep(1)
+                        checkbox = driver.find_element(By.ID, "acceptwaiver")
+                        ActionChains(driver).move_to_element(checkbox).click().perform()
+                        time.sleep(2)
                     except:
-                        print("No waiver prompt found.")
+                        print(f"🚨 Error occurred: No waiver prompt found")
+                        return {"status": "failed", "message": "No waiver prompt found."}
 
                     # Confirm the booking
                     finish_button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='finishBtn']")))
