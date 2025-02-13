@@ -12,7 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 # Configure headless Chrome
 chrome_options = Options()
-chrome_options.add_argument("--headless")  # No UI
+#chrome_options.add_argument("--headless")  # No UI
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
@@ -48,6 +48,7 @@ def book_court():
 
         # Calculate the booking date (3 days ahead)
         booking_date = (datetime.today() + timedelta(days=3)).strftime('%Y-%m-%d')
+        print ('*** Booking Court for: '+booking_date)
         url = f"https://my.lifetime.life/clubs/il/vernon-hills/resource-booking.html?sport=Squash&clubId=183&date={booking_date}&startTime=-1&duration=60&hideModal=true"
         driver.get(url)
         time.sleep(5)
