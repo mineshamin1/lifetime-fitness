@@ -60,16 +60,16 @@ def book_court():
                     timeslot_xpath = f".//a[.//div[contains(@class, 'timeslot-time') and text()='{time_slot}'] and .//div[contains(@class, 'timeslot-resource') and text()='{court}']]"
                     timeslot = WebDriverWait(driver, 3).until(EC.element_to_be_clickable((By.XPATH, timeslot_xpath)))
                     driver.execute_script("arguments[0].click();", timeslot)
-                    time.sleep(5)
+                    time.sleep(3)
 
                     # Accept waiver if prompted
-                    try:                                                
+                    try:
                         checkbox = driver.find_element(By.ID, "acceptwaiver")
-                        ActionChains(driver).move_to_element(checkbox).click().perform()                        
-                        time.sleep(1)
-                        
+                        ActionChains(driver).move_to_element(checkbox).click().perform()
+                        time.sleep(2)
                     except:
-                        print("No waiver prompt found.")
+                        print(f"🚨 Error occurred: No waiver prompt found")
+                        return {"status": "failed", "message": "No waiver prompt found."}
 
                     # Confirm the booking
                     finish_button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='finishBtn']")))
@@ -88,8 +88,6 @@ def book_court():
         print(f"🚨 Error occurred: {e}")
         return {"status": "error", "message": str(e)}
 
-    finally:
-        driver.quit()
 
 if __name__ == "__main__":
     try:
