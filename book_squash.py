@@ -12,7 +12,7 @@ from selenium.webdriver.common.action_chains import ActionChains
 
 # Configure headless Chrome
 chrome_options = Options()
-#chrome_options.add_argument("--headless")  # No UI
+chrome_options.add_argument("--headless")  # No UI
 chrome_options.add_argument("--no-sandbox")
 chrome_options.add_argument("--disable-dev-shm-usage")
 
@@ -67,7 +67,7 @@ def book_court():
                     try:
                         checkbox = driver.find_element(By.ID, "acceptwaiver")
                         ActionChains(driver).move_to_element(checkbox).click().perform()
-                        time.sleep(2)
+                        time.sleep(3)
                     except:
                         print(f"🚨 Error occurred: No waiver prompt found")
                         return {"status": "failed", "message": "No waiver prompt found."}
@@ -75,9 +75,10 @@ def book_court():
                     # Confirm the booking
                     finish_button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='finishBtn']")))
                     driver.execute_script("arguments[0].click();", finish_button)
-                    time.sleep(2)
+                    time.sleep(4)
 
                     print(f"✅ Successfully booked {court} at {time_slot}. Enjoy your game!")
+                    time.sleep(2)
                     return {"status": "success", "message": f"Booked {court} at {time_slot}."}
                 except:
                     print(f"❌ {court} at {time_slot} is not available. Trying next option...")
