@@ -26,7 +26,7 @@ def book_court():
     email = 'xxx@gmail.com'
     password = '1234'
 
-    # Define preferred times & courts
+    # Define preferred times & courts2222222
     # For each time slot, check all the courts availablity
     PREFERRED_TIMES = ["4:30 PM", "5:00 PM", "6:00 PM"]
     PREFERRED_COURTS = ["Court 3", "Court 4", "Court 2", "Court 1"]
@@ -75,6 +75,8 @@ def book_court():
                     # Confirm the booking
                     finish_button = WebDriverWait(driver, 5).until(EC.element_to_be_clickable((By.CSS_SELECTOR, "button[data-testid='finishBtn']")))
                     driver.execute_script("arguments[0].click();", finish_button)
+                    
+                    #ActionChains(driver).move_to_element(finish_button).click().perform()
                     time.sleep(4)
 
                     print(f"✅ Successfully booked {court} at {time_slot}. Enjoy your game!")
